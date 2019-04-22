@@ -1,5 +1,0 @@
-{
-"hooks": [
-      {"name": "dw.system.request.onRequest", "script": "./request.js"}
- ]
-}

@@ -1,0 +1,9 @@
+{
+      "hooks":
+      [
+            {
+                  "name": "dw.system.request.onRequest",
+                  "script": "./cartridge/scripts/request.js"
+            }
+      ]
+}

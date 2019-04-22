@@ -1,0 +1,16 @@
+{
+  "name": "knownuser.v3.salesforcecc",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "watch": "sgmf-scripts --watch"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^24.7.1",
+    "sgmf-scripts": "^2.3.0"
+  }
+}

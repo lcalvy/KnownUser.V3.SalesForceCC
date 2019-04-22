@@ -5,12 +5,15 @@
  * 
  */
 
+ var Cookie = require('./node_modules/dw/web/Cookie');
+
 exports.httpContextProvider = function() {
     return {
         getHttpRequest: function() {
             return {
                 getAbsoluteUri: function() { 
-                    return request.httpURL; 
+					const protocol = this.getHeader('x-forwarded-proto') || this.getHeader('x-is-server_port_secure') === "1" ? 'https' : 'http';
+                    return protocol  + '://' + this.getHeader('x-is-host') + this.getHeader('x-is-path_translated');
                 },
                 getUserAgent: function() { 
                 	 request.httpUserAgent;
@@ -34,7 +37,7 @@ exports.httpContextProvider = function() {
 					
         			if (cookieKey in cookies)
         			{
-        				return cookies[cookieKey];
+        				return cookies[cookieKey].getValue();
         			}
         			else { 
         				return '';
@@ -56,9 +59,11 @@ exports.httpContextProvider = function() {
             return {
             	setCookie : function(cookieName, cookieValue, domain, expir) {
             		
-            		var cookieToAdd = require('dw/web/Cookie').Cookie(cookieName, cookieValue);
-        			cookieToAdd.domain = domain;
-        			cookieToAdd.setMaxAge(expir);
+            		var cookieToAdd = Cookie(cookieName, cookieValue);
+					if (domain && domain !== '') {
+						cookieToAdd.domain = domain;
+					}
+					cookieToAdd.setMaxAge(expir);
         			
         			response.addHttpCookie(cookieToAdd);
         			return '';

@@ -1,5 +1,5 @@
 'use strict';
-exports.onRequest = function() {
-	var QueueIt = require('~/cartridge/scripts/QueueIt.js');
-	QueueIt.Start();
-}
+exports.onRequest = function () {
+    var queueIt = require('~/cartridge/scripts/QueueIt.js');
+    queueIt.start();
+};
